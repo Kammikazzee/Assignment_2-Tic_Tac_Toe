@@ -19,7 +19,6 @@ public class GameBoardFactory {
             }
         }
     }
-
     public static IGameModel getGameModel(GAME_MODE gameMode) {
         switch (gameMode) {
             case SINGLE_PLAYER:

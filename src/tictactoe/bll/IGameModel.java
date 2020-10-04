@@ -5,12 +5,13 @@
  */
 package tictactoe.bll;
 
+import javafx.scene.control.Button;
+
 /**
  *
  * @author Stegger
  */
-public interface IGameModel
-{
+public interface IGameModel {
 
     /**
      * Returns 0 for player 0, 1 for player 1.
@@ -50,4 +51,6 @@ public interface IGameModel
      * Resets the game to a new game state.
      */
     void newGame();
+
+    void getPressedButton(Button button, int col, int row);
 }

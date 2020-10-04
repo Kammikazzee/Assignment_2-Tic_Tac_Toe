@@ -76,6 +76,7 @@ public class TicTacViewController implements Initializable {
             Integer col = GridPane.getColumnIndex((Node) event.getSource());
             int r = (row == null) ? 0 : row;
             int c = (col == null) ? 0 : col;
+            game.getPressedButton((Button) event.getSource(), c, r);
             int player = game.getNextPlayer();
             if (game.play(c, r)) {
                 Button btn = (Button) event.getSource();
@@ -93,7 +94,6 @@ public class TicTacViewController implements Initializable {
             e.printStackTrace();
         }
     }
-
     /**
      * Eventhandler that is called whenever the players want's to start a new game.
      * The method will switch game mode if the player has chosen so.

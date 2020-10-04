@@ -1,13 +1,33 @@
 package tictactoe.bll;
 
+import javafx.scene.control.Button;
+import java.util.ArrayList;
+
+
 /**
  * The GameBoardTwoPlayer class is the mandatory implementation for the TicTacToe assignment.
  * It is used for games where there are two human players.
  */
 public class GameBoardTwoPlayer implements IGameModel {
+    private boolean turn;
+    private ArrayList<ArrayList<Button>> buttons;
+
+    private boolean strikeX;
+    private boolean strikeO;
 
     protected GameBoardTwoPlayer() {
+        buttons = new ArrayList<ArrayList<Button>>();
 
+        for (int m = 0; m < 3; m++) {
+            buttons.add(new ArrayList<Button>());
+            for (int n = 0; n < 3; n++) {
+                buttons.get(m).add(new Button(""));
+            }
+        }
+
+        turn = false;
+        strikeX = true;
+        strikeO = true;
     }
 
     /**
@@ -17,9 +37,15 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        //TODO Implement this method
-        return 0;
+        if (!turn) {
+           // System.out.println("Turn: O");
+            return 0;
+        } else {
+           // System.out.println("Turn: X");
+            return 1;
+        }
     }
+
 
     /**
      * Attempts to let the current player play at the given coordinates. It the
@@ -33,7 +59,14 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        //TODO Implement this method
+        if (turn && buttons.get(row).get(col).getText().equals("X")) {
+            return false;
+        }
+        if (!turn && buttons.get(row).get(col).getText().equals("O")) {
+            return false;
+        }
+
+        turn = !turn;
         return true;
     }
 
@@ -41,13 +74,77 @@ public class GameBoardTwoPlayer implements IGameModel {
      * Tells us if the game has ended either by draw or by meeting the winning
      * condition.
      *
-     * @return true if the game is over, else it will retun false.
+     * @return true if the game is over, else it will return false.
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
+        // Check vertically
+        for (int m = 0; m < 3; m++) {
+            strikeX = true;
+            strikeO = true;
+            for (int n = 0; n < 3; n++) {
+                if (!buttons.get(m).get(n).getText().equals("X"))
+                    strikeX = false;
+                if (!buttons.get(m).get(n).getText().equals("O"))
+                    strikeO = false;
+            }
+            // Check for strike
+            if (strikeX || strikeO) {
+                System.out.println("GAME OVER");
+                return true;
+            }
+        }
+
+        // Check horizontally
+        for (int n = 0; n < 3; n++) {
+            strikeX = true;
+            strikeO = true;
+            for (int m = 0; m < 3; m++) {
+                if (!buttons.get(m).get(n).getText().equals("X"))
+                    strikeX = false;
+                if (!buttons.get(m).get(n).getText().equals("O"))
+                    strikeO = false;
+            }
+            // Check for strike
+            if (strikeX || strikeO) {
+                System.out.println("GAME OVER");
+                return true;
+            }
+        }
+
+        // Check diagonally (Top, Down; Left, Right)
+        strikeX = true;
+        strikeO = true;
+        for (int n = 0; n < 3; n++) {
+            if (!buttons.get(n).get(n).getText().equals("X"))
+                strikeX = false;
+            if (!buttons.get(n).get(n).getText().equals("O"))
+                strikeO = false;
+        }
+        // Check strike
+        if (strikeX || strikeO) {
+            System.out.println("GAME OVER");
+            return true;
+        }
+
+        // Check diagonally (Top, Down; Right, Left)
+        strikeX = true;
+        strikeO = true;
+        for (int n = 0; n < 3; n++) {
+            if (!buttons.get(n).get(2 - n).getText().equals("X"))
+                strikeX = false;
+            if (!buttons.get(n).get(2 - n).getText().equals("O"))
+                strikeO = false;
+        }
+        // Check strike
+        if (strikeX || strikeO) {
+            System.out.println("GAME OVER");
+            return true;
+        }
+
         return false;
     }
+
 
     /**
      * Gets the id of the winner, -1 if its a draw.
@@ -56,9 +153,11 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        //TODO Implement this method
+        if (strikeX) return 0;
+        if (strikeO) return 1;
         return -1;
     }
+
 
     /**
      * Resets the game to a new game state.
@@ -68,4 +167,10 @@ public class GameBoardTwoPlayer implements IGameModel {
         //TODO Implement this method
     }
 
+    // Get the buttons
+    @Override
+    public void getPressedButton(Button button, int col, int row) {
+        if (buttons.size() > 0)
+            buttons.get(row).set(col, button);
+    }
 }

@@ -1,5 +1,7 @@
 package tictactoe.bll;
 
+import javafx.scene.control.Button;
+
 /**
  * The GameBoardSinglePlayer class is the optional and advanced implementation for the TicTacToe assignment.
  * It is used for games where there are one human player vs. a computer player.
@@ -66,5 +68,8 @@ public class GameBoardSinglePlayer implements IGameModel {
     @Override
     public void newGame() {
         //TODO Implement this method
+    }
+
+    public void getPressedButton(Button button, int col, int row) {
     }
 }
