@@ -14,6 +14,7 @@ public class GameBoardTwoPlayer implements IGameModel {
 
     private boolean strikeX;
     private boolean strikeO;
+    private int turnAmount = 0;
 
     protected GameBoardTwoPlayer() {
         buttons = new ArrayList<ArrayList<Button>>();
@@ -39,6 +40,7 @@ public class GameBoardTwoPlayer implements IGameModel {
     public int getNextPlayer() {
         if (!turn) {
            // System.out.println("Turn: O");
+            //turnAmount++;
             return 0;
         } else {
            // System.out.println("Turn: X");
@@ -65,7 +67,7 @@ public class GameBoardTwoPlayer implements IGameModel {
         if (!turn && buttons.get(row).get(col).getText().equals("O")) {
             return false;
         }
-
+        turnAmount++;
         turn = !turn;
         return true;
     }
@@ -141,7 +143,7 @@ public class GameBoardTwoPlayer implements IGameModel {
             System.out.println("GAME OVER");
             return true;
         }
-
+        if (turnAmount == 9) return true;
         return false;
     }
 
@@ -164,7 +166,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        //TODO Implement this method
+        turnAmount = 0;
     }
 
     // Get the buttons
