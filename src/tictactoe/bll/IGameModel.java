@@ -54,5 +54,4 @@ public interface IGameModel {
 
     void getPressedButton(Button button, int col, int row);
 
-    int getPlayerScore(int player);
 }

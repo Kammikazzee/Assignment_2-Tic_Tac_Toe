@@ -16,9 +16,6 @@ public class GameBoardTwoPlayer implements IGameModel {
     private boolean strikeO;
     private int turnAmount = 0;
 
-    private int playerscoreX;
-    private int playerscoreO;
-
 
     protected GameBoardTwoPlayer() {
         buttons = new ArrayList<ArrayList<Button>>();
@@ -33,8 +30,6 @@ public class GameBoardTwoPlayer implements IGameModel {
         turn = false;
         strikeX = true;
         strikeO = true;
-        playerscoreX = 0;
-        playerscoreO = 0;
     }
 
     /**
@@ -157,12 +152,10 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public int getWinner() {
         if (strikeX) {
-            playerscoreX++;
             return 0;
         }
 
         if (strikeO) {
-            playerscoreO++;
             return 1;
         }
         return -1;
@@ -181,16 +174,5 @@ public class GameBoardTwoPlayer implements IGameModel {
     public void getPressedButton(Button button, int col, int row) {
         if (buttons.size() > 0)
             buttons.get(row).set(col, button);
-    }
-
-    public int getPlayerScore(int player) {
-        if (player == 0) {
-            return playerscoreX;
-        }
-
-        if (player == 1 ) {
-            return playerscoreO;
-        }
-        return -1;
     }
 }
