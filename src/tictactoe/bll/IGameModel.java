@@ -53,4 +53,6 @@ public interface IGameModel {
     void newGame();
 
     void getPressedButton(Button button, int col, int row);
+
+    int getPlayerScore(int player);
 }

@@ -72,4 +72,8 @@ public class GameBoardSinglePlayer implements IGameModel {
 
     public void getPressedButton(Button button, int col, int row) {
     }
+
+    public int getPlayerScore(int player) {
+        return 0;
+    }
 }

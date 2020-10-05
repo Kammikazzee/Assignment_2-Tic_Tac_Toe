@@ -10,11 +10,15 @@ import java.util.ArrayList;
  */
 public class GameBoardTwoPlayer implements IGameModel {
     private boolean turn;
-    private ArrayList<ArrayList<Button>> buttons;
+    private final ArrayList<ArrayList<Button>> buttons;
 
     private boolean strikeX;
     private boolean strikeO;
     private int turnAmount = 0;
+
+    private int playerscoreX;
+    private int playerscoreO;
+
 
     protected GameBoardTwoPlayer() {
         buttons = new ArrayList<ArrayList<Button>>();
@@ -29,6 +33,8 @@ public class GameBoardTwoPlayer implements IGameModel {
         turn = false;
         strikeX = true;
         strikeO = true;
+        playerscoreX = 0;
+        playerscoreO = 0;
     }
 
     /**
@@ -39,16 +45,12 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public int getNextPlayer() {
         if (!turn) {
-           // System.out.println("Turn: O");
-            //turnAmount++;
             return 0;
         } else {
-           // System.out.println("Turn: X");
             return 1;
         }
     }
-
-
+    
     /**
      * Attempts to let the current player play at the given coordinates. It the
      * attempt is successful the current player has ended his turn and it is the
@@ -147,7 +149,6 @@ public class GameBoardTwoPlayer implements IGameModel {
         return false;
     }
 
-
     /**
      * Gets the id of the winner, -1 if its a draw.
      *
@@ -155,11 +156,17 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        if (strikeX) return 0;
-        if (strikeO) return 1;
+        if (strikeX) {
+            playerscoreX++;
+            return 0;
+        }
+
+        if (strikeO) {
+            playerscoreO++;
+            return 1;
+        }
         return -1;
     }
-
 
     /**
      * Resets the game to a new game state.
@@ -174,5 +181,16 @@ public class GameBoardTwoPlayer implements IGameModel {
     public void getPressedButton(Button button, int col, int row) {
         if (buttons.size() > 0)
             buttons.get(row).set(col, button);
+    }
+
+    public int getPlayerScore(int player) {
+        if (player == 0) {
+            return playerscoreX;
+        }
+
+        if (player == 1 ) {
+            return playerscoreO;
+        }
+        return -1;
     }
 }

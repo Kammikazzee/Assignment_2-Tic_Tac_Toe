@@ -2,6 +2,7 @@ package tictactoe.gui.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.swing.text.html.ListView;
 
 public class ScoreModel {
 
@@ -16,7 +17,7 @@ public class ScoreModel {
     }
 
     public void setNextWinner(String winner) {
-        //TODO Implement this method.
+        winners = FXCollections.observableArrayList("Dada");
+        System.out.println(winners);
     }
-
 }
