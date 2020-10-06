@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tictactoe.bll;
 
 import javafx.scene.control.Button;
@@ -53,5 +48,4 @@ public interface IGameModel {
     void newGame();
 
     void getPressedButton(Button button, int col, int row);
-
 }

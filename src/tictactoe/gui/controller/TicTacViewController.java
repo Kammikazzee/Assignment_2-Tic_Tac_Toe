@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tictactoe.gui.controller;
 
 import javafx.event.ActionEvent;
@@ -84,8 +79,7 @@ public class TicTacViewController implements Initializable {
                 btn.setText(xOrO);
                 if (game.isGameOver()) {
                     int winner = game.getWinner();
-                    if (winner == -1)
-                        xOrO = "draw";
+                    if (winner == -1) xOrO = "draw";
                     displayWinner(winner);
                     scoreModel.setNextWinner(xOrO);
                 } else {
@@ -148,5 +142,4 @@ public class TicTacViewController implements Initializable {
             btn.setText("");
         }
     }
-
 }
