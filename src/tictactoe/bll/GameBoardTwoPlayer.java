@@ -3,19 +3,16 @@ package tictactoe.bll;
 import javafx.scene.control.Button;
 import java.util.ArrayList;
 
-
 /**
  * The GameBoardTwoPlayer class is the mandatory implementation for the TicTacToe assignment.
  * It is used for games where there are two human players.
  */
 public class GameBoardTwoPlayer implements IGameModel {
-    private boolean turn;
     private final ArrayList<ArrayList<Button>> buttons;
-
+    private boolean turn;
     private boolean strikeX;
     private boolean strikeO;
-    private int turnAmount = 0;
-
+    private int     turnAmount = 0;
 
     protected GameBoardTwoPlayer() {
         buttons = new ArrayList<ArrayList<Button>>();
@@ -26,7 +23,6 @@ public class GameBoardTwoPlayer implements IGameModel {
                 buttons.get(m).add(new Button(""));
             }
         }
-
         turn = false;
         strikeX = true;
         strikeO = true;
@@ -58,12 +54,11 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        if (turn && buttons.get(row).get(col).getText().equals("X")) {
+        if (isGameOver()) return false;
+        if (turn && buttons.get(row).get(col).getText().equals("X"))
             return false;
-        }
-        if (!turn && buttons.get(row).get(col).getText().equals("O")) {
+        if (!turn && buttons.get(row).get(col).getText().equals("O"))
             return false;
-        }
         turnAmount++;
         turn = !turn;
         return true;
@@ -89,7 +84,6 @@ public class GameBoardTwoPlayer implements IGameModel {
             }
             // Check for strike
             if (strikeX || strikeO) {
-                System.out.println("GAME OVER");
                 return true;
             }
         }
@@ -106,7 +100,6 @@ public class GameBoardTwoPlayer implements IGameModel {
             }
             // Check for strike
             if (strikeX || strikeO) {
-                System.out.println("GAME OVER");
                 return true;
             }
         }
@@ -122,7 +115,6 @@ public class GameBoardTwoPlayer implements IGameModel {
         }
         // Check strike
         if (strikeX || strikeO) {
-            System.out.println("GAME OVER");
             return true;
         }
 
@@ -135,9 +127,9 @@ public class GameBoardTwoPlayer implements IGameModel {
             if (!buttons.get(n).get(2 - n).getText().equals("O"))
                 strikeO = false;
         }
+
         // Check strike
         if (strikeX || strikeO) {
-            System.out.println("GAME OVER");
             return true;
         }
         if (turnAmount == 9) return true;
@@ -151,13 +143,10 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        if (strikeX) {
+        if (strikeX)
             return 0;
-        }
-
-        if (strikeO) {
+        if (strikeO)
             return 1;
-        }
         return -1;
     }
 

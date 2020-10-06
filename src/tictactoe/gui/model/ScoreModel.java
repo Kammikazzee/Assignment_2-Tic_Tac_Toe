@@ -16,6 +16,10 @@ public class ScoreModel {
     }
 
     public void setNextWinner(String winner) {
-
+        if (!winner.equals("draw")) {
+            winners.add("Player " + winner + " won!");
+        } else {
+            winners.add("It's a draw!");
+        }
     }
 }
